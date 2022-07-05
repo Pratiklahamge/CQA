@@ -1,0 +1,38 @@
+
+spotify Day 1
+
+package com.bridgelabz.spotify;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+public class SpotifyApi {
+	public String token = "Bearer BQBJcVZsUOOEVMWtP13PZhSXqzM7ORX4U9MJ_6cJpBStq4XKhIOMCGBlx624Tsy-ozx28B4g0thuEpKaqkNwKugydniqsgln7lEs_xsPJQEiegqBenuBuFXNJK7LgfV4NZqpVOLV2hqTY44YkwybuJUELLyLXmD4GAlXgP9294sr2P5UkakUP-wiL7Wq_fHNF4w2Ba7nW3zsPXQdLdUlD7TAjSjOOrNzxy-w2OKZefUaaEp8v54qxmTHxLI_Rjy70pEyS9TqjePYQryVVcIAAMbOm14a9RHmjENonImY03zBpKyX0vfn5_sCMy93pg";
+	@Test
+	public void testGet_CurrentUsersProfile() {
+		Response response = given().contentType(ContentType.JSON)
+							.accept(ContentType.JSON)
+							.header("Authorization", token)
+							.get(" http://api.spotify.com/v1/me");
+		response.prettyPrint();
+		int statusCode = response.getStatusCode();
+		System.out.println("Status code:" +statusCode);
+		Assert.assertEquals(statusCode, 200);
+	}
+	
+	@Test
+	public void testGet_Users_Profile() {
+		Response response = given().contentType(ContentType.JSON)
+							.accept(ContentType.JSON)
+							.header("Authorization", token)
+							.get("	https://api.spotify.com/v1/users/tx9me6zidf344x9sbteqkqwff");
+		response.prettyPrint();
+		int statusCode = response.getStatusCode();
+		System.out.println("Status code:" +statusCode);
+		Assert.assertEquals(statusCode, 200);
+	}
+
+}
